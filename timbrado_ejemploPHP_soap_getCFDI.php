@@ -39,11 +39,6 @@ try {
 	$fileTmpZip = "timbrado.zip";  //nombre del zip
 	//mandamos en un zip el xml timbrado en caso de exito
 	file_put_contents( $fileTmpZip, $res->return);
-	//mandamos en un txt el mensaje soap del request
-	file_put_contents("request.txt", $client->__getLastRequest());
-	//mandamos en un txt el response del xml timbrado
-	file_put_contents("response.txt", $client->__getLastResponse());
-	
 	$zipXml = new ZipArchive();//En caso de not found ZipArchive, asegurate de tener instalada la extension
 
 	if ($zipXml->open($fileTmpZip) === TRUE) {	  		
@@ -57,9 +52,24 @@ try {
 	}
 	
 } catch (SoapFault $e) {
+	#En caso de un error inspeccionar la excepcion:
 	var_dump( $e->faultcode, $e->faultstring, $e->detail );
-	//mandamos en un txt el response del error
-	file_put_contents("response.txt", $client->__getLastResponse());
+} finally{
+	$time=time();
+	#En ambiente de pruebas mandamos el requets y response  a un archivo respecticamente para inspeccionarlos en caso de error, se asigna un timestamp para identificarlos:
+	//mandamos en un XML el mensaje soap del request
+ 
+	
+	$doc=new DOMDocument();
+	$doc->loadXML($client->__getLastRequest());
+	$doc->formatOutput=true;
+	$doc->save("timbrado_getCFDI_request_{$time}.xml");
 
+	//mandamos en un XML el response del xml timbrado
+	
+	$doc=new DOMDocument();
+	$doc->loadXML($client->__getLastResponse());
+	$doc->formatOutput=true;
+	$doc->save("timbrado_getCFDI_response_{$time}.xml");
 }
 ?>

@@ -22,7 +22,7 @@ $parametros = array(
   	'passwordPfx'=>$passwordPfx,
   	"uuids"=>$uuids
 );
-print_r($parametros);
+#print_r($parametros);
 //url de pruebas
 $wsdl ="http://devcfdi.sifei.com.mx:8888/CancelacionSIFEI/Cancelacion?wsdl";
 
@@ -42,10 +42,11 @@ try {
 	#obtenemos la excepcion:
 	var_dump( $e->faultcode, $e->faultstring, $e->detail );
 } finally{
-	#En ambiente de pruebas mandamos el requets y response  un archivo respecticamente para inspeccionarlos en caso de error:
+	$time=time();
+	#En ambiente de pruebas mandamos el requets y response  a un archivo respecticamente para inspeccionarlos en caso de error, se asigna un timestamp para identificarlos:
 	//mandamos en un XML el mensaje soap del request
-	file_put_contents("request.xml", $client->__getLastRequest());
+	file_put_contents("cancelaCFDI_request_{$time}.xml", $client->__getLastRequest());
 	//mandamos en un XML el response del xml timbrado
-	file_put_contents("response.xml", $client->__getLastResponse());	
+	file_put_contents("cancelaCFDI_response_{$time}.xml", $client->__getLastResponse());	
 }
 ?>
