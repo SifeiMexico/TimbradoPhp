@@ -1,0 +1,7 @@
+*.ini
+*.txt
+*.cer
+*.key
+*.pem
+*.pfx
+*.xml
