@@ -63,13 +63,13 @@ try {
 	$doc=new DOMDocument();
 	$doc->loadXML($client->__getLastRequest());
 	$doc->formatOutput=true;
-	$doc->save("timbrado_getCFDI_request_{$time}.xml");
+	$doc->save(__DIR__."/workfiles/timbrado_getCFDI_request_{$time}.xml");
 
 	//mandamos en un XML el response del xml timbrado
 	
 	$doc=new DOMDocument();
 	$doc->loadXML($client->__getLastResponse());
 	$doc->formatOutput=true;
-	$doc->save("timbrado_getCFDI_response_{$time}.xml");
+	$doc->save(__DIR__."/workfiles/timbrado_getCFDI_response_{$time}.xml");
 }
 ?>

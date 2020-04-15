@@ -2,6 +2,7 @@
 /**
 * Ejemplo de cancelacion WS SOAP cancelaCFDI()
 * Nota: Para simplificar los ejemplos todas las rutas son relativas y los datos se leen de un archivo, lo cual no debe de hacerse en un ambiente de produccion.
+* # PFX CONFORMADO POR key y cert
 */
 $array_ini =parse_ini_file(__DIR__."/config.ini");
 
