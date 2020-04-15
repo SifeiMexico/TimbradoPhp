@@ -45,11 +45,7 @@ try {
   		$zipXml->extractTo( $tmpDirName );
 		$zipXml->close();
 	}
-	foreach(glob($tmpDirName."/*.xml") as $file) {
-			$xmlTimbrado= file_get_contents($file);			
-			unlink($file);
-			file_put_contents( $originalName, $xmlTimbrado);
-	}
+	 
 	
 } catch (SoapFault $e) {
 	#En caso de un error inspeccionar la excepcion:
