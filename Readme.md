@@ -3,7 +3,7 @@
 
 
 
-# Ejemplos de timbrado y cancelacion en PHP
+# Ejemplos de timbrado y cancelación en PHP
 
 Este repositorio incluye en ejemplos de los servicios SOAP de timbrado y cancelación de Sifei en en lenguaje PHP.
 
