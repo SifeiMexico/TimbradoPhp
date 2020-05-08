@@ -6,3 +6,5 @@
 *.pfx
 *.xml
 *.zip
+*.sh
+*.json
