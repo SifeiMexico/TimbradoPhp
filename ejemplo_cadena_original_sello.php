@@ -13,6 +13,13 @@ class ejemplo_cadena_original_sello {
     protected $passphrase;
 
     protected $comprobante;
+
+    public function pkcs8DER2PEM($keyDerContent){
+        $type="ENCRYPTED PRIVATE KEY";
+        $pem = chunk_split(base64_encode($keyDerContent), 64, "\n");
+        $pem = "-----BEGIN ".$type."-----\n".$pem."-----END ".$type."-----\n";
+        return $pem;
+    }
     /**
      * Obtiene el sello.
      *
@@ -20,9 +27,12 @@ class ejemplo_cadena_original_sello {
      * @param  $passphrase Contraseña de la llave.
      * @return string
      */
-    public function getSello($key,$passphrase=''): string
+    public function getSello($key,$passphrase='',$type='PEM'): string
     {
-        #pasamos la llave y la contraseña:
+        if($type=='DER'){
+            $key=$this->pkcs8DER2PEM($key);            
+        }
+        #pasamos la llave y la contraseña para preparar la llave y ser usada en la operacion de firmar
         $pkey = openssl_get_privatekey($key,$passphrase);
         if(false===$pkey){
             throw new Exception("Ocurrio un error al importa llave, verifica que los parametros son correctos");
@@ -86,10 +96,17 @@ $utils->setComprobante($dom);
 
 
 #todo desde un solo metodo: genera la cadena original, sella y codifica en base64 lista para agregar en el atributo Sello del CFDI
+
 println($utils->getSello(
-    file_get_contents("llave.pem"), #llave en formato PEM
+    file_get_contents("ENCRYPTED_KEY.pem"), #llave en formato PEM
     "12345678a")                    #contraseña
 );
-
+# usando .key directamente
+println($utils->getSello(
+    file_get_contents("key.key"), #llave en formato DER
+    "12345678a",
+    'DER'                    #contraseña
+    )
+);
 #si deseas ver la cadena original.
 println($utils->getCadenaOriginal());
