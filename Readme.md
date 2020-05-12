@@ -36,10 +36,97 @@ Cancelación  | `cancelaCFDI()`  | Metodo para cancelar CFDI
 
 ## Ejemplos simples
 
-Se incluyen ejemplos simples manuales para el servicio de timbrado y cancelacion.
+Se incluyen ejemplos simples  para el servicio de timbrado y cancelacion, inspeccionar :
 
-## Ejemplos con Cliente de Sifei.
+- [Timbrado](http://github.com/SifeiMexico/TimbradoPhp/blob/master/timbrado_ejemploPHP_soap_getCFDI.php)
 
+- [Cancelacion](https://github.com/SifeiMexico/TimbradoPhp/blob/master/cancelacion_ejemplo_soap_cancelaCFDI.php)
+
+# Cliente de Sifei.
+Ademas de los ejemplos simples, se provee de todo un proyecto para el uso inmediato de todos los servicios relacionados a timbrado y cancelacion de CFDI.
+
+**Recuerda solicitar tus credenciales de acceso para consumir el servicio.**
+
+## Inicio rápido (menos de 5 minutos)
+### Instalar cliente
+
+Para instalar el cliente solo debes instalarlo via composer:
+
+```shell
+composer require sifei/timbrado-soap-client
+```
+Una vez realizado, podras importar las clases incluidas e instanciarlas para la invocacion de metodos ,**por defecto las clases apuntan al entorno de pruebas.**, una vez finalizado tu proceso de integracion podras usar la constante incluida "PROD_ENV", la cual apunta a producción.
+
+### Ejemplo timbrado usando  cliente
+```php
+# include_once 'vendor/autoload.php'; #incluir el autoload (generado por composer) para autocargar las clases.
+
+#Importamos las clases
+use DHF\Sifei\Ws\Soap\Timbrado\getCFDI;
+use DHF\Sifei\Ws\Soap\SifeiTimbradoService;
+
+$sifeiService =new SifeiTimbradoService(
+    SifeiTimbradoService::DEV_ENV,
+    ['trace'=>true]    #Para recuperar el request y response
+);
+#clase con los parametros de timbrado:
+$timbradoParams= new getCFDI();
+$timbradoParams->setUsuario($usuario);
+$timbradoParams->setPassword($password);
+$timbradoParams->setIdEquipo($idEquipo);
+$timbradoParams->setSerie($serie);
+$timbradoParams->setArchivoXMLZip($xml);#arhivo xml
+
+try {
+	$res = $sifeiService->getCFDI($timbradoParams);
+	$fileTmpZip = "timbrado.zip";  //nombre del zip
+	//mandamos en un zip el xml timbrado en caso de exito
+	file_put_contents( $fileTmpZip, $res->getReturn());
+	$zipXml = new ZipArchive();
+	if ($zipXml->open($fileTmpZip) === TRUE) {	  		
+  		$zipXml->extractTo( $tmpDirName );
+		$zipXml->close();
+	}
+} catch (SoapFault $e) {
+	#En caso de un error inspeccionar la excepcion:
+	var_dump( $e->faultcode, $e->faultstring, $e->detail)
+}
+```
+
+### Ejemplo de sellado
+
+```php
+<?php
+use DHF\Sifei\Ws\Soap\utils\CFDIUtils;
+//clase ejeemplo de genracion de cadena originaly sellado
+include_once 'vendor/autoload.php';
+function println($str){
+    echo $str."\n";
+}
+#para sellar se necesita generar la cadena original y luego sellarla, esta clase ofrece el metodo para hacer todo en un sola invocacion
+
+$dom= new DOMDocument();
+#en este caso se carga el xml desde archivo
+$dom->load(__DIR__."/assets/cfdi.xml");
+$utils= new CFDIUtils();
+$utils->setComprobante($dom);
+#todo desde un solo metodo: genera la cadena original, sella y codifica en base64 lista para agregar en el atributo Sello del CFDI
+
+println($utils->getSello(
+    file_get_contents("ENCRYPTED_KEY.pem"), #llave en formato PEM
+    "12345678a")                    #contraseña
+);
+# usando .key directamente
+println($utils->getSello(
+    file_get_contents("key.key"), #llave en formato DER
+    "12345678a",
+    'DER'                    #contraseña
+    )
+);
+```
+
+
+## Descripción 
 Ademas de los ejemplos simples, se incluyen 2 clases principales que agrupan las operaciones de los distintos servicios de SIFEI.
 
 - SifeiTimbradoService
@@ -63,6 +150,8 @@ Ademas de los ejemplos simples, se incluyen 2 clases principales que agrupan las
     - [cfdiRelacionado(cfdiRelacionado $parameters)](Método-cfdiRelacionado)
     - [peticionesPendientes(peticionesPendientes $parameters)](Método-peticionesPendientes)
     - [consultaSATCFDI(consultaSATCFDI $parameters)](Método-consultaSATCFDI)
+
+
 
 
 # Timbrado:
