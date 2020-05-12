@@ -1,0 +1,17 @@
+{
+  "name": "sifei/timbrado-soap-client",
+    "description": "SOAP WS client. Cliente de servicio web de Sifei para timbrado y cancelacion basado en SOAP ",
+    "authors": [
+        {
+            "name": "Daniel Hernandez",
+            "email": "development@sifei.com.mx"
+        }
+    ],
+  "autoload": {
+    "psr-4": {
+      "DHF\\Sifei\\Ws\\Soap\\": "src/sifei/ws/soap",
+      "DHF\\Sifei\\Ws\\Soap\\Timbrado\\": "src/sifei/ws/soap/timbrado",
+      "DHF\\Sifei\\Ws\\Soap\\Cancelacion\\": "src/sifei/ws/soap/cancelacion"
+    }
+  }
+}

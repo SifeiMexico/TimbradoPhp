@@ -9,3 +9,4 @@
 *.sh
 *.json
 vendor/
+!composer.json
