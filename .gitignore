@@ -8,3 +8,4 @@
 *.zip
 *.sh
 *.json
+vendor/
