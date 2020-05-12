@@ -58,11 +58,11 @@ Ademas de los ejemplos simples, se incluyen 2 clases principales que agrupan las
 
 
 - SifeiCancelacionService
-    - [cancelaCFDI(cancelaCFDI $parameters)](Cancelacion_cancelaCFDI)
-    - [procesarRespuesta(procesarRespuesta $parameters)](Cancelacion_procesarRespuesta)
-    - [cfdiRelacionado(cfdiRelacionado $parameters)](Cancelacion_cfdiRelacionado)
-    - [peticionesPendientes(peticionesPendientes $parameters)](Cancelacion_peticionesPendientes)
-    - [consultaSATCFDI(consultaSATCFDI $parameters)](Cancelacion_consultaSATCFDI)
+    - [cancelaCFDI(cancelaCFDI $parameters)](Método-cancelaCFDI)
+    - [procesarRespuesta(procesarRespuesta $parameters)](Método-procesarRespuesta)
+    - [cfdiRelacionado(cfdiRelacionado $parameters)](Método-cfdiRelacionado)
+    - [peticionesPendientes(peticionesPendientes $parameters)](Método-peticionesPendientes)
+    - [consultaSATCFDI(consultaSATCFDI $parameters)](Método-consultaSATCFDI)
 
 
 # Timbrado:
