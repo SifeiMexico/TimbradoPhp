@@ -48,6 +48,16 @@ class CFDIUtils {
             return base64_encode($signature);
         }
         /**
+         * Obtiene el path del xslt que se incluye en este paquete.
+         * SI deseas utilizar tus propios XSLT, extiende esta clase y sobre escribe unicamente este metodo para devolver 
+         * el xslt que deseas manejar.
+         *
+         * @return string
+         */
+        public function getPathCadenaOriginal(){
+            return  __DIR__.'/../../../../../sat/xslt/cadenaoriginal_3_3.xslt';
+        }
+        /**
          * Gets the original string.
          *
          * @return string
@@ -56,7 +66,7 @@ class CFDIUtils {
         {
             $xsl = new DOMDocument();
             #importamos el xslt
-            $path = __DIR__.'/../../../../../sat/xslt/cadenaoriginal_3_3.xslt';
+            $path = $this->getPathCadenaOriginal();
             $path=\realpath($path);
             //$xslt = file_get_contents($path);
             
