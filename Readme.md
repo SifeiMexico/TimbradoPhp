@@ -59,6 +59,7 @@ Una vez realizado, podras importar las clases incluidas e instanciarlas para la 
 
 ### Ejemplo timbrado usando  cliente
 ```php
+<?php
 # include_once 'vendor/autoload.php'; #incluir el autoload (generado por composer) para autocargar las clases.
 
 #Importamos las clases
