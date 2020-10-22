@@ -10,3 +10,6 @@
 *.json
 vendor/
 !composer.json
+!KeyCert/*.cer
+!KeyCert/*.key
+!KeyCert/*.pem
