@@ -31,7 +31,7 @@ class CFDIUtils {
          * @param  $passphrase Contraseña de la llave.
          * @return string
          */
-        public function getSello($key,$passphrase='',$type='PEM'): string
+        public function getSello($key,$passphrase='',$type='PEM')
         {
             if($type=='DER'){
                 $key=$this->pkcs8DER2PEM($key);            
@@ -62,7 +62,7 @@ class CFDIUtils {
          *
          * @return string
          */
-        public function getCadenaOriginal(): string
+        public function getCadenaOriginal()
         {
             $xsl = new DOMDocument();
             #importamos el xslt
