@@ -11,7 +11,7 @@ Este repositorio incluye en ejemplos de los servicios SOAP de timbrado y cancela
 
 
 
-Los ejemplos se alimentan de un archivo config.ini para leer los datos de conexion, **No hacer esto en produccion**.
+Los ejemplos se alimentan de un archivo config.ini para leer los datos de conexión, **No hacer esto en produccion**.
 La url esta configurada al entorno de pruebas.
 
 Para ejecutar estas pruebas debes solicitar tus accesos de QA(pruebas).
