@@ -58,6 +58,9 @@ class consultaSATCFDI
       $this->rr = $rr;
       $this->tt = $tt;
       $this->fe = $fe;
+      if(strlen($this->fe)>8){
+        $this->fe=substr($this->fe, -8);
+        }
     }
 
     /**
