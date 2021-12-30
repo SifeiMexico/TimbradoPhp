@@ -8,8 +8,8 @@ use DHF\Sifei\Ws\Soap\Timbrado\SIFEIService;
  * Contiene las constantes para apuntar a entornos diferentes
  */
 class SifeiTimbradoService extends SIFEIService{
-    public const DEV_ENV="http://devcfdi.sifei.com.mx:8080/SIFEI33/SIFEI?wsdl";
-    public const PROD_ENV="https://sat.sifei.com.mx:8443/SIFEI/SIFEI?wsdl";
+    const DEV_ENV="http://devcfdi.sifei.com.mx:8080/SIFEI33/SIFEI?wsdl";
+    const PROD_ENV="https://sat.sifei.com.mx:8443/SIFEI/SIFEI?wsdl";
 
     /**
      * @param array $options A array of config values

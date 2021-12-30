@@ -9,8 +9,8 @@ use DHF\Sifei\Ws\Soap\Cancelacion\Cancelacion;
  * Contiene las constantes para apuntar a entornos diferentes
  */
 class SifeiCancelacionService extends Cancelacion{
-    public const DEV_ENV="http://devcfdi.sifei.com.mx:8888/CancelacionSIFEI/Cancelacion?wsdl";
-    public const PROD_ENV="https://sat.sifei.com.mx:9000/CancelacionSIFEI/Cancelacion?wsdl";
+    const DEV_ENV="http://devcfdi.sifei.com.mx:8888/CancelacionSIFEI/Cancelacion?wsdl";
+    const PROD_ENV="https://sat.sifei.com.mx:9000/CancelacionSIFEI/Cancelacion?wsdl";
 
     /**
      * @param array $options A array of config values
